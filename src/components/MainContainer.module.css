@@ -1,0 +1,242 @@
+.main-container {
+  width: 375px;
+  height: 704px;
+  background: var(--white, #fff);
+}
+.header {
+  width: 375px;
+  height: 240px;
+  background: #21092f;
+  position: relative;
+}
+.mask1 {
+  width: 286px;
+  height: 157px;
+  border-radius: 6px;
+  background: linear-gradient(169deg, #fff 0%, #d2d3d9 100%);
+  position: absolute;
+  margin-top: 32px;
+  right: 16px;
+}
+.mask-rectangle {
+  width: 286px;
+  height: 34.6px;
+  background: #2f2f2f;
+  margin-top: 14.74px;
+}
+.mask-cvc {
+  width: 230.975px;
+  height: 29.739px;
+  background: #adb5be;
+  color: var(--white, #fff);
+  text-align: right;
+  font-size: 9px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1.286px;
+  text-transform: uppercase;
+  padding: 8.91px 10.79px 9.83px 200.18px;
+}
+.mask2 {
+  width: 285px;
+  height: 156.208px;
+  border-radius: 6px;
+  background: linear-gradient(164deg, #6348fe 0%, #610595 100%);
+  position: absolute;
+  z-index: 9;
+  margin-top: 126.4px;
+  right: 73px;
+  padding: 17.6px 27px 20.6px 19px;
+}
+.mask2 img {
+  background: none;
+  margin-bottom: 37px;
+}
+.mask-info {
+  display: inline-flex;
+  padding-bottom: 0px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 124.107px;
+  width: 245px;
+}
+.mask-card-number {
+  color: var(--white, #fff);
+  font-size: 18px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 2.2px;
+}
+.mask-cardholder {
+  color: var(--white, #fff);
+  font-size: 9px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1.286px;
+  text-transform: uppercase;
+}
+
+.mask-data {
+  color: var(--white, #fff);
+  text-align: right;
+  font-size: 9px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1.286px;
+  text-transform: uppercase;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 327px;
+  height: 464px;
+  margin: 91px 24px 45px 24px;
+}
+
+.exp-date {
+  display: flex;
+  gap: 11px;
+  width: 327px;
+  height: 69px;
+}
+.data {
+  display: flex;
+  flex-direction: column;
+  width: 152px;
+  height: 69px;
+}
+.data label,
+.cvc label {
+  color: var(--deep-violet, #21092f);
+  font-size: 12px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 9px;
+}
+.input {
+  display: flex;
+  gap: 8px;
+}
+.input input {
+  width: 72px;
+  height: 45px;
+  border-radius: 8px;
+  border: 1px solid var(--light-grey, #dfdee0);
+  background: var(--white, #fff);
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+}
+.cvc {
+  width: 164px;
+  height: 69px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.cvc input {
+  width: 164px;
+  height: 45px;
+  border-radius: 8px;
+  border: 1px solid var(--light-grey, #dfdee0);
+  background: var(--white, #fff);
+  outline: none;
+  cursor: pointer;
+  text-align: left;
+}
+.cvc div {
+  display: inline-flex;
+  gap: 50px;
+}
+.cvc div p {
+  color: var(--red, #ff5050);
+  font-size: 12px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+}
+.curd-number,
+.cardholder {
+  display: flex;
+  width: 327px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 9px;
+}
+.cardholder label,
+.curd-number label {
+  color: var(--deep-violet, #21092f);
+  font-size: 12px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.curd-number input,
+.cardholder input {
+  width: 327px;
+  height: 45px;
+  border-radius: 8px;
+  color: #21092f;
+  font-size: 18px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: 1px solid var(--light-grey, #dfdee0);
+  background: var(--white, #fff);
+  outline: none;
+  cursor: pointer;
+  caret-color: #21092f;
+}
+
+.cardholder input::placeholder,
+.curd-number input::placeholder,
+.cvc input::placeholder,
+.input input::placeholder {
+  color: var(--deep-violet, #21092f);
+  opacity: 0.25;
+  font-size: 18px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  /* caret-color: var(--deep-violet, #21092f); */
+}
+/* .curd-number::after {
+  content: "Wrong format, numbers only";
+} */
+.curd-number div {
+  display: inline-flex;
+  gap: 70px;
+}
+.curd-number div p {
+  color: var(--red, #ff5050);
+  font-size: 12px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+}
+.error-boder {
+  border: 1px solid var(--light-grey, #ff5050) !important;
+}

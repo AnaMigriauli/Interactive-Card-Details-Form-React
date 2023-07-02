@@ -1,4 +1,8 @@
 import { useState } from "react";
+import Button from "./UI/Buttons";
+import submitImg from "../assets/images/Path.svg";
+import classes from "./MainContainer.module.css";
+import circles from "../assets/images/Group 8.svg";
 
 const MainContainer = () => {
   const [formValues, setFormValues] = useState({
@@ -8,136 +12,245 @@ const MainContainer = () => {
     year: "",
     cvc: "",
   });
-  const [FormErrors, setFormErrors] = useState({});
-  console.log(formValues);
+  const [cardErrors, setCardErrors] = useState(false);
+  const [errors, setErrors] = useState(false);
+  // const [yearErrors, setYearErrors] = useState(false);
+  // const [cvcErrors, setCvcErrors] = useState(false);
+
+  const [isSubmit, setIsSubmit] = useState(false);
+  // const [navigate, setNavigate] = useState(false);
+
   const inputChangeHandler = (el, value) => {
     setFormValues({
       ...formValues,
       [el]: value,
     });
   };
-  // const nameChangeHandler = (name) => {
-  //   if (name.trim().length > 0) {
-  //     setFormValues({ ..., name:formValues.name });
-  //   } else if (name.match(/^[a-zA-Z]+$/)) {
-  //     console.log("Wrong format, numbers letters");
-  //   }
-  // };
-  // const curdNumberChangeHandler = (curdnumber) => {
-  //   if (curdnumber.length > 16) {
-  //     curdnumber = curdnumber.substr(0, 16);
-  //   }
-  //   const splits = curdnumber.match(/.{1,4}/g);
-  //   let spacedNumber = "";
-  //   if (splits) {
-  //     spacedNumber = splits.join(" ");
-  //   }
-  //   console.log(spacedNumber);
-  //   setCustomer({ ...customer, curdNumber: curdnumber });
-  // };
-  // const dataChangeHandler = (expdata) => {
-  //   setCustomer({ ...customer, expData: expdata });
-  // };
-  // const YearChangeHandler = (year) => {
-  //   setCustomer({ ...customer, year: year });
-  // };
-  // const inputChangeHandler = (cvc) => {
-  //   setCustomer({ ...customer, cvc: cvc });
-  // };
+
   const submitHandler = (e) => {
     e.preventDefault();
-    const customerDataObj = {
-      name: formValues.name,
-      curdNumber: formValues.curdNumber,
-      month: formValues.expData,
-      year: formValues.year,
-      cvc: formValues.cvc,
-    };
-    console.log(customerDataObj);
-    setFormErrors(validate(customerDataObj));
-  };
-  const validate = (values) => {
-    const errors = {};
-    const re = /^[0-9\b]+$/;
-
     if (
-      /[!@#$%^&*(),.?":{}|<>]/g.test(values.name) ||
-      !/^[A-Z]/.test(values.name)
+      formValues.name.trim().length !== 0 &&
+      formValues.curdNumber.trim().length !== 0 &&
+      formValues.month.trim().length !== 0 &&
+      formValues.year.trim().length !== 0 &&
+      formValues.cvc.trim().length !== 0
     ) {
-      errors.name = "Wrong format, letters only";
+      setIsSubmit(true);
     }
-    if (!re.test(values.curdNumber)) {
-      errors.curdNumber = "Wrong format, numbers only";
-    }
-    if (!values.month) {
-      errors.month = "Can not be blank";
-    }
-    if (!values.year) {
-      errors.year = "Can not be blank";
-    }
-    if (!values.cvc) {
-      errors.cvc = "Can not be blank";
-    }
-    return errors;
   };
-  console.log(FormErrors);
+
+  const number = /^[a-z\b]+$/;
+  const simbols = /[!@#$%^&*(),.?":{}|<>]/g;
+  const validateCurdNumber = (value) => {
+    if (simbols.test(value) || number.test(value)) {
+      setCardErrors(true);
+    }
+  };
+
+  const validateInputs = (value) => {
+    console.log(typeof +value);
+    if (+value.length === 0 && +value.length === 0 && +value.length === 0) {
+      setErrors(true);
+    }
+  };
+  // const validateYear = (value) => {
+  //   if (+value.length === 0) {
+  //     setYearErrors(true);
+  //   }
+  // };
+  // const validateCvc = (value) => {
+  //   if (+value.length === 0) {
+  //     setCvcErrors(true);
+  //   }
+  // };
+
+  const CurdNumberFormat = (value) => {
+    let formattedText = value.split(" ").join("");
+    if (formattedText.length > 0) {
+      formattedText = formattedText.match(new RegExp(".{1,4}", "g")).join(" ");
+    }
+    return formattedText.length > 1 ? formattedText : value;
+  };
+
   return (
-    <div onSubmit={submitHandler}>
-      <div></div>
-      <form>
-        <label>Cardholder Name</label>
-        <input
-          type="text"
-          placeholder="e.g. Jane Appleseed"
-          value={formValues.name}
-          onChange={(e) => {
-            // const name = e.target.value;
-            inputChangeHandler("name", e.target.value);
-          }}
-        ></input>
+    <div>
+      {!isSubmit ? (
+        <div className={classes["main-container"]}>
+          <div className={classes.header}>
+            <div className={classes.mask1}>
+              <div className={classes["mask-rectangle"]}></div>
+              <div className={classes["mask-cvc"]}>000</div>
+            </div>
+            <div className={classes.mask2}>
+              <img src={circles} alt="circles" />
+              <div className={classes["mask-card-number"]}>
+                0000 0000 0000 0000
+              </div>
+              <div className={classes["mask-info"]}>
+                <p className={classes["mask-cardholder"]}>JANE APPLESEED</p>
+                <p className={classes["mask-data"]}>00/00</p>
+              </div>
+            </div>
+          </div>
+          <form className={classes.form} onSubmit={submitHandler}>
+            <div className={classes["cardholder"]}>
+              <label>Cardholder Name</label>
+              <input
+                type="text"
+                placeholder="e.g. Jane Appleseed"
+                value={formValues.name}
+                onChange={(e) => {
+                  inputChangeHandler("name", e.target.value);
+                }}
+              ></input>
+            </div>
+            <div className={classes["curd-number"]}>
+              <div>
+                <label>Card Number</label>
+                {cardErrors && <p>Wrong format, numbers only</p>}
+              </div>
+              <input
+                className={cardErrors ? classes["error-boder"] : ""}
+                placeholder="e.g. 1234 5678 9123 0000"
+                value={formValues.curdNumber}
+                onChange={(e) => {
+                  inputChangeHandler(
+                    "curdNumber",
+                    CurdNumberFormat(e.target.value)
+                  );
+                }}
+                onBlur={(e) => {
+                  validateCurdNumber(e.target.value);
+                }}
+              ></input>
+            </div>
 
-        <label>Card Number</label>
-        <input
-          placeholder="e.g. 1234 5678 9123 0000"
-          value={formValues.curdNumber}
-          onChange={(e) => {
-            // const curdnumber = e.target.value;
-            inputChangeHandler("curdNumber", e.target.value);
-          }}
-        ></input>
-
-        <label>Exp. Date (MM/YY)</label>
-        <input
-          type="number"
-          placeholder="MM"
-          value={formValues.expData}
-          onChange={(e) => {
-            // const expdata = e.target.value;
-            inputChangeHandler("month", e.target.value);
-          }}
-        ></input>
-        <input
-          type="number"
-          placeholder="YY"
-          value={formValues.year}
-          onChange={(e) => {
-            // const year = e.target.value;
-            inputChangeHandler("year", e.target.value);
-          }}
-        ></input>
-
-        <label>CVC</label>
-        <input
-          type="cvc"
-          placeholder="e.g. 123"
-          value={formValues.cvc}
-          onChange={(e) => {
-            // const cvc = e.target.value;
-            inputChangeHandler("cvc", e.target.value);
-          }}
-        ></input>
-        <button type="submit">confirm</button>
-      </form>
+            <div className={classes["exp-date"]}>
+              <div className={classes.data}>
+                <label>Exp. Date (MM/YY)</label>
+                <div className={classes.input}>
+                  <input
+                    className={errors ? classes["error-boder"] : ""}
+                    type="number"
+                    placeholder="MM"
+                    value={formValues.expData}
+                    onChange={(e) => {
+                      inputChangeHandler("month", e.target.value);
+                    }}
+                    onBlur={(e) => {
+                      validateInputs(e.target.value);
+                    }}
+                  ></input>
+                  <input
+                    className={errors ? classes["error-boder"] : ""}
+                    type="year"
+                    placeholder="YY"
+                    value={formValues.year}
+                    onChange={(e) => {
+                      inputChangeHandler("year", e.target.value);
+                    }}
+                    onBlur={(e) => {
+                      validateInputs(e.target.value);
+                    }}
+                  ></input>
+                </div>
+                {/* {monthErrors && <p>Can not be blank</p>}
+                {yearErrors && <p>Can not be blank</p>} */}
+              </div>
+              <div className={classes.cvc}>
+                <div>
+                  <label>CVC</label>
+                  {errors && <p>Can not be blank</p>}
+                </div>
+                <input
+                  className={errors ? classes["error-boder"] : ""}
+                  type="cvc"
+                  placeholder="e.g. 123"
+                  value={formValues.cvc}
+                  onChange={(e) => {
+                    inputChangeHandler("cvc", e.target.value);
+                  }}
+                  onBlur={(e) => {
+                    validateInputs(e.target.value);
+                  }}
+                ></input>
+              </div>
+            </div>
+            <Button type="submit">confirm</Button>
+          </form>
+        </div>
+      ) : (
+        <div>
+          <div>
+            <div
+              style={{
+                width: "286px",
+                height: "157px",
+                background:
+                  "linear-gradient(168.73deg, #FFFFFF 5%, #D2D3D9 91.69%)",
+              }}
+            >
+              <div
+                style={{
+                  width: "286px",
+                  height: "34.6px",
+                  background: "#2F2F2F",
+                }}
+              ></div>
+              <div
+                style={{
+                  width: "230.98px",
+                  height: "29.74px",
+                  background: "#ADB5BE",
+                }}
+              >
+                {formValues.cvc}
+              </div>
+            </div>
+            <div
+              style={{
+                width: "285px",
+                height: "156.21px",
+                background:
+                  "linear-gradient(163.95deg, #6348FE 4.74%, #610595 88.83%)",
+              }}
+            >
+              <div>{CurdNumberFormat(formValues.curdNumber)}</div>
+              <div>
+                <p>{formValues.name}</p>
+                <p>{`${formValues.month}/${formValues.year}`}</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div
+              style={{
+                background:
+                  "linear-gradient(163.95deg, #6348FE 4.74%, #610595 88.83%)",
+                width: "80px",
+                height: "80px",
+                borderRadius: "50%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src={submitImg}
+                alt="submitImg"
+                style={{
+                  width: "24.04px",
+                  height: "16px",
+                }}
+              />
+            </div>
+            <h1>THANK YOU!</h1>
+            <span>We have added your card details</span>
+            <Button>Continue</Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
