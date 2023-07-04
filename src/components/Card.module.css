@@ -1,0 +1,91 @@
+.header {
+  width: 375px;
+  height: 240px;
+  background: #21092f;
+  position: relative;
+}
+.mask1 {
+  width: 286px;
+  height: 157px;
+  border-radius: 6px;
+  background: linear-gradient(169deg, #fff 2%, #d2d3d9 100%);
+  position: absolute;
+  margin-top: 32px;
+  right: 16px;
+}
+.mask-rectangle {
+  width: 286px;
+  height: 34.6px;
+  background: #2f2f2f;
+  margin-top: 14.74px;
+}
+.mask-cvc {
+  width: 230.975px;
+  height: 29.739px;
+  background: #adb5be;
+  color: var(--white, #fff);
+  text-align: right;
+  font-size: 9px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1.286px;
+  text-transform: uppercase;
+  padding: 8.91px 10.79px 9.83px 200.18px;
+}
+.mask2 {
+  width: 285px;
+  height: 156.208px;
+  border-radius: 6px;
+  background: linear-gradient(164deg, #6348fe 5%, #610595 100%);
+  position: absolute;
+  z-index: 9;
+  margin-top: 126.4px;
+  right: 73px;
+  padding: 17.6px 27px 20.6px 19px;
+}
+.mask2 img {
+  background: none;
+  margin-bottom: 37px;
+}
+.mask-info {
+  display: inline-flex;
+  padding-bottom: 0px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 124.107px;
+  width: 245px;
+}
+.mask-card-number {
+  color: var(--white, #fff);
+  font-size: 18px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 2.2px;
+}
+
+.mask-cardholder {
+  color: var(--white, #fff);
+  font-size: 9px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1.286px;
+  text-transform: uppercase;
+}
+
+.mask-data {
+  color: var(--white, #fff);
+  text-align: right;
+  font-size: 9px;
+  font-family: Space Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1.286px;
+  text-transform: uppercase;
+}

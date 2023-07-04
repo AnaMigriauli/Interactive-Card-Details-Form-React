@@ -1,0 +1,5 @@
+.main-container {
+  width: 375px;
+  height: 704px;
+  background: var(--white, #fff);
+}
