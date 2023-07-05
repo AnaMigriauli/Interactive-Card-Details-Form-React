@@ -4,3 +4,8 @@
   align-items: center;
   height: 100%;
 }
+
+@font-face {
+  font-family: "SpaceGrotesk-VariableFont_wght";
+  src: url("./assets/fonts/SpaceGrotesk-VariableFont_wght.ttf");
+}

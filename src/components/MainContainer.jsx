@@ -21,69 +21,83 @@ const formReducer = (state, action) => {
       return state;
   }
 };
-// const VALIDATION_STATE = {
-//   errors: false,
-// };
-// const errorReducer = (state, action) => {
-//  if(action.type==='ERROR'){
-
-//  }
-//   }
-// };
+const INITIAL_VALIDATION_STATE = {
+  cardErrors: false,
+  monthErrors: false,
+  yearErrors: false,
+  cvcErrors: false,
+};
+const formValidityReducer = (state, action) => {
+  let isValid = false;
+  const letters = /[a-z]/gi;
+  const simbols = /[!@#$%^&*(),.?":{}|<>]/g;
+  if (action.type === "CARD_ERROR") {
+    isValid =
+      simbols.test(action.payload.curdNumber) &&
+      letters.test(action.payload.curdNumber)
+        ? true
+        : false;
+    return { ...state, [action.payload.cardErrors]: !isValid };
+  }
+};
 const MainContainer = () => {
   const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
 
-  const [cardErrors, setCardErrors] = useState(false);
-  const [errors, setErrors] = useState(false);
-  const [yearErrors, setYearErrors] = useState(false);
-  const [cvcErrors, setCvcErrors] = useState(false);
+  const [formValidityState, dispatchFormValidity] = useReducer(
+    formValidityReducer,
+    INITIAL_VALIDATION_STATE
+  );
+
+  // const [cardErrors, setCardErrors] = useState(false);
+  // const [errors, setErrors] = useState(false);
+  // const [yearErrors, setYearErrors] = useState(false);
+  // const [cvcErrors, setCvcErrors] = useState(false);
 
   const [isSubmit, setIsSubmit] = useState(false);
-
+  const validityFunction = (e) => {
+    dispatchFormValidity({ typeof: "CARD_ERROR", payload: state });
+  };
   const inputChangeHandler = (e) => {
     dispatch({
       type: "CHANGE_INPUT",
       payload: { name: e.target.name, value: e.target.value },
     });
+
+    validityFunction(e);
   };
   console.log(state);
-
+  console.log(formValidityState);
   const submitHandler = (e) => {
     e.preventDefault();
     if (
-      state.name.trim().length !== 0 &&
-      state.curdNumber.trim().length !== 0 &&
-      state.month.trim().length !== 0 &&
-      state.year.trim().length !== 0 &&
-      state.cvc.trim().length !== 0
+      state.name.trim().length !== 0
+      // !cardErrors &&
+      // !errors &&
+      // !yearErrors &&
+      // !cvcErrors
     ) {
       setIsSubmit(true);
     }
   };
 
-  const number = /^[1-9\b]+$/;
-  const simbols = /[!@#$%^&*(),.?":{}|<>]/g;
-  const validateCurdNumber = (value) => {
-    if (simbols.test(value) || !number.test(value)) {
-      setCardErrors(true);
-    }
-  };
+  // const letters = /[a-z]/gi;
+  // const simbols = /[!@#$%^&*(),.?":{}|<>]/g;
 
-  const validateInputs = (value) => {
-    if (+value.length === 0 && +value.length === 0 && +value.length === 0) {
-      setErrors(true);
-    }
-  };
-  const validateYear = (value) => {
-    if (+value.length === 0) {
-      setYearErrors(true);
-    }
-  };
-  const validateCvc = (value) => {
-    if (+value.length === 0) {
-      setCvcErrors(true);
-    }
-  };
+  // if (simbols.test(state.curdNumber) && letters.test(state.curdNumber)) {
+  //   setCardErrors(true);
+  // }
+  // console.log(state.curdNumber);
+  // if (+state.month.length === 0) {
+  //   setErrors(true);
+  // }
+
+  // if (+state.year.length === 0) {
+  //   setYearErrors(true);
+  // }
+
+  // if (+state.cvc.length === 0) {
+  //   setCvcErrors(true);
+  // }
 
   const CurdNumberFormat = (value) => {
     let formattedText = value.split(" ").join("");
@@ -97,7 +111,7 @@ const MainContainer = () => {
     <div>
       {!isSubmit ? (
         <Container>
-          <Card></Card>
+          <Card state={state}></Card>
           <form className={classes.form} onSubmit={submitHandler}>
             <div className={classes["cardholder"]}>
               <label>Cardholder Name</label>
@@ -113,19 +127,20 @@ const MainContainer = () => {
             <div className={classes["curd-number"]}>
               <div>
                 <label>Card Number</label>
-                {cardErrors && <p>Wrong format, numbers only</p>}
+                {formValidityState.cardErrors && (
+                  <p>Wrong format, numbers only</p>
+                )}
               </div>
               <input
                 name="curdNumber"
-                className={cardErrors ? classes["error-boder"] : ""}
+                className={
+                  formValidityState.cardErrors ? classes["error-boder"] : ""
+                }
                 placeholder="e.g. 1234 5678 9123 0000"
                 maxLength={19}
                 autoComplete="off"
                 value={CurdNumberFormat(state.curdNumber)}
                 onChange={inputChangeHandler}
-                onBlur={(e) => {
-                  validateCurdNumber(e.target.value);
-                }}
               ></input>
             </div>
 
@@ -135,53 +150,48 @@ const MainContainer = () => {
                 <div className={classes.input}>
                   <input
                     name="month"
-                    className={errors ? classes["error-boder"] : ""}
+                    className={
+                      formValidityState.monthErrors
+                        ? classes["error-boder"]
+                        : ""
+                    }
                     // type="number"
                     placeholder="MM"
                     maxLength={2}
                     autoComplete="off"
                     value={state.expData}
                     onChange={inputChangeHandler}
-                    onBlur={(e) => {
-                      validateInputs(e.target.value);
-                    }}
                   ></input>
                   <input
                     name="year"
-                    className={yearErrors ? classes["error-boder"] : ""}
+                    className={
+                      formValidityState.yearErrors ? classes["error-boder"] : ""
+                    }
                     type="year"
                     maxLength={4}
                     placeholder="YY"
                     autoComplete="off"
                     value={state.year}
                     onChange={inputChangeHandler}
-                    onBlur={(e) => {
-                      validateYear(e.target.value);
-                    }}
                   ></input>
                 </div>
               </div>
               <div className={classes.cvc}>
                 <div>
                   <label>CVC</label>
-                  {errors || yearErrors || cvcErrors ? (
-                    <p>Can not be blank</p>
-                  ) : (
-                    ""
-                  )}
+                  {formValidityState.monthErrors ? <p>Can not be blank</p> : ""}
                 </div>
                 <input
                   name="cvc"
                   autoComplete="off"
                   maxLength={3}
-                  className={cvcErrors ? classes["error-boder"] : ""}
+                  className={
+                    formValidityState.cvcErrors ? classes["error-boder"] : ""
+                  }
                   type="cvc"
                   placeholder="e.g. 123"
                   value={state.cvc}
                   onChange={inputChangeHandler}
-                  onBlur={(e) => {
-                    validateCvc(e.target.value);
-                  }}
                 ></input>
               </div>
             </div>
@@ -190,7 +200,7 @@ const MainContainer = () => {
         </Container>
       ) : (
         <Container>
-          <Card isSubmit={isSubmit} state={state}></Card>
+          <Card state={state}></Card>
           <div className={classes.resultCard}>
             <div className={classes.circle}>
               <img src={submitImg} alt="submitImg" />

@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  font-family: "Space Grotesk", sans-serif;
 }
 #root {
   height: 100vh;

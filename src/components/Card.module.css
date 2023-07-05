@@ -45,17 +45,20 @@
   right: 73px;
   padding: 17.6px 27px 20.6px 19px;
 }
-.mask2 img {
+.circles {
   background: none;
   margin-bottom: 37px;
 }
+
 .mask-info {
   display: inline-flex;
   padding-bottom: 0px;
   justify-content: center;
   align-items: flex-start;
-  gap: 124.107px;
-  width: 245px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .mask-card-number {
   color: var(--white, #fff);
@@ -89,3 +92,11 @@
   letter-spacing: 1.286px;
   text-transform: uppercase;
 }
+/* .oval {
+  width: 347.5px;
+  height: 366.311px;
+  transform: rotate(45deg);
+  filter: blur(40px);
+  border-radius: 262.627px;
+  opacity: 0.8474048376083374;
+} */
