@@ -22,22 +22,34 @@ const formReducer = (state, action) => {
   }
 };
 const INITIAL_VALIDATION_STATE = {
+  // nameErrors: false,
   cardErrors: false,
   monthErrors: false,
   yearErrors: false,
   cvcErrors: false,
 };
 const formValidityReducer = (state, action) => {
+  // console.log(action);
   let isValid = false;
-  const letters = /[a-z]/gi;
+  // const letters = /[a-z]/gi;
   const simbols = /[!@#$%^&*(),.?":{}|<>]/g;
-  if (action.type === "CARD_ERROR") {
-    isValid =
-      simbols.test(action.payload.curdNumber) &&
-      letters.test(action.payload.curdNumber)
-        ? true
-        : false;
-    return { ...state, [action.payload.cardErrors]: !isValid };
+
+  switch (action.typeof) {
+    case "CARD_ERROR":
+      isValid = simbols.test(action.payload) ? false : true;
+      return {
+        ...state,
+        cardErrors: !isValid,
+      };
+    case "MONTH_ERROR":
+      console.log(action.payload);
+      isValid = action.payload.trim().length === 0 ? true : false;
+      return {
+        ...state,
+        monthErrors: !isValid,
+      };
+    default:
+      return state;
   }
 };
 const MainContainer = () => {
@@ -55,18 +67,28 @@ const MainContainer = () => {
 
   const [isSubmit, setIsSubmit] = useState(false);
   const validityFunction = (e) => {
-    dispatchFormValidity({ typeof: "CARD_ERROR", payload: state });
+    dispatchFormValidity(
+      {
+        typeof: "CARD_ERROR",
+        payload: state.curdNumber,
+      },
+      { typeof: "MONTH_ERROR", payload: state.month }
+    );
   };
+
+  console.log(state.month.trim().length);
   const inputChangeHandler = (e) => {
     dispatch({
       type: "CHANGE_INPUT",
       payload: { name: e.target.name, value: e.target.value },
     });
 
-    validityFunction(e);
+    validityFunction();
   };
+
   console.log(state);
   console.log(formValidityState);
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (
@@ -161,12 +183,13 @@ const MainContainer = () => {
                     autoComplete="off"
                     value={state.expData}
                     onChange={inputChangeHandler}
+                    onBlur={validityFunction}
                   ></input>
                   <input
                     name="year"
-                    className={
-                      formValidityState.yearErrors ? classes["error-boder"] : ""
-                    }
+                    // className={
+                    //   formValidityState.yearErrors ? classes["error-boder"] : ""
+                    // }
                     type="year"
                     maxLength={4}
                     placeholder="YY"
@@ -185,9 +208,9 @@ const MainContainer = () => {
                   name="cvc"
                   autoComplete="off"
                   maxLength={3}
-                  className={
-                    formValidityState.cvcErrors ? classes["error-boder"] : ""
-                  }
+                  // className={
+                  //   formValidityState.cvcErrors ? classes["error-boder"] : ""
+                  // }
                   type="cvc"
                   placeholder="e.g. 123"
                   value={state.cvc}
