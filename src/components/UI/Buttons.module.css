@@ -3,7 +3,7 @@
   height: 53px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: var(--deep-violet, #21092f);
+  background: var(--deep-violet, #3f1258);
   color: var(--white, #fff);
   font-size: 18px;
   font-family: Space Grotesk;
@@ -11,4 +11,9 @@
   font-weight: 500;
   line-height: normal;
   margin-top: 8px;
+  border: none;
+}
+.button:disabled {
+  background: var(--deep-violet, #21092f);
+  cursor: not-allowed;
 }

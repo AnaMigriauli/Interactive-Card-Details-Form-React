@@ -46,8 +46,8 @@
   padding: 17.6px 27px 20.6px 19px;
 }
 .circles {
-  background: none;
   margin-bottom: 37px;
+  border-radius: 50px;
 }
 
 .mask-info {
