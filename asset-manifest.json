@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Interactive-Card-Details-Form-React/static/css/main.67f0157c.css",
+    "main.js": "/Interactive-Card-Details-Form-React/static/js/main.1d9f0201.js",
+    "static/media/SpaceGrotesk-VariableFont_wght.ttf": "/Interactive-Card-Details-Form-React/static/media/SpaceGrotesk-VariableFont_wght.1036357b9651eff7d3dd.ttf",
+    "static/media/Group 8.svg": "/Interactive-Card-Details-Form-React/static/media/Group 8.b782f2f3e6fe8f4a8213a6978e928b06.svg",
+    "index.html": "/Interactive-Card-Details-Form-React/index.html",
+    "static/media/Path.svg": "/Interactive-Card-Details-Form-React/static/media/Path.abeb2ffaab5967349f5f9bb280bf489b.svg",
+    "main.67f0157c.css.map": "/Interactive-Card-Details-Form-React/static/css/main.67f0157c.css.map",
+    "main.1d9f0201.js.map": "/Interactive-Card-Details-Form-React/static/js/main.1d9f0201.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.67f0157c.css",
+    "static/js/main.1d9f0201.js"
+  ]
+}
