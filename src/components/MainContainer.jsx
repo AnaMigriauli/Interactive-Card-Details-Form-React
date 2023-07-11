@@ -1,9 +1,10 @@
 import { useState, useReducer, useEffect } from "react";
 import Button from "./UI/Buttons";
-import submitImg from "../assets/images/Path.svg";
 import classes from "./MainContainer.module.css";
 import Card from "./Card";
 import Container from "./Container";
+import Input from "./UI/Input";
+import ResultCurd from "./ResultContainer";
 
 const INITIAL_STATE = {
   name: "",
@@ -31,7 +32,6 @@ const INITIAL_VALIDATION_STATE = {
 const letters = /[a-z]/gi;
 const simbols = /[!@#$%^&*(),.?":{}|<>]/g;
 const formValidityReducer = (state, action) => {
-  // console.log(action);
   let isValid = false;
   switch (action.typeof) {
     case "NAME_ERROR":
@@ -56,14 +56,14 @@ const formValidityReducer = (state, action) => {
         monthErrors: !isValid,
       };
     case "YEAR_ERROR":
-      isValid = action.payload.trim().length !== 0 ? true : false;
+      isValid = +action.payload.trim().length !== 0 ? true : false;
 
       return {
         ...state,
         yearErrors: !isValid,
       };
     case "CVC_ERROR":
-      isValid = action.payload.trim().length !== 0 ? true : false;
+      isValid = +action.payload.trim().length !== 0 ? true : false;
 
       return {
         ...state,
@@ -75,14 +75,13 @@ const formValidityReducer = (state, action) => {
 };
 const MainContainer = () => {
   const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
-
   const [formValidityState, dispatchFormValidity] = useReducer(
     formValidityReducer,
     INITIAL_VALIDATION_STATE
   );
 
-  const [isSubmit, setIsSubmit] = useState(false);
-  const [formIsValid, setFormIsValid] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(null);
+  const [formIsValid, setFormIsValid] = useState(null);
 
   const nameValidityFunction = (e) => {
     dispatchFormValidity({ typeof: "NAME_ERROR", payload: e.target.value });
@@ -90,7 +89,6 @@ const MainContainer = () => {
   const curdValidityFunction = (e) => {
     dispatchFormValidity({ typeof: "CARD_ERROR", payload: e.target.value });
   };
-
   const monthValidityFunction = (e) => {
     dispatchFormValidity({ typeof: "MONTH_ERROR", payload: e.target.value });
   };
@@ -115,17 +113,13 @@ const MainContainer = () => {
   const { cvcErrors: cvcIsValid } = formValidityState;
   useEffect(() => {
     const identifier = setTimeout(() => {
-      console.log("cheak for validity");
+      // console.log("cheak");
       setFormIsValid(
-        !nameIsValid &&
-          !cardIsValid &&
-          !monthIsValid &&
-          !yearIsValid &&
-          !cvcIsValid
+        nameIsValid || cardIsValid || monthIsValid || yearIsValid || cvcIsValid
       );
     }, 500);
     return () => {
-      console.log("clean");
+      // console.log("clean");
       clearTimeout(identifier);
     };
   }, [nameIsValid, cardIsValid, monthIsValid, yearIsValid, cvcIsValid]);
@@ -133,11 +127,11 @@ const MainContainer = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (
-      !nameIsValid &&
-      !cardIsValid &&
-      !monthIsValid &&
-      !yearIsValid &&
-      !cvcIsValid
+      state.name.trim().length !== 0 &&
+      state.curdNumber.length === 19 &&
+      state.month.trim().length === 2 &&
+      state.year.trim().length === 4 &&
+      state.cvc.trim().length === 3
     ) {
       setIsSubmit(true);
     }
@@ -157,129 +151,98 @@ const MainContainer = () => {
         <Container>
           <Card state={state}></Card>
           <form className={classes.form} onSubmit={submitHandler}>
-            <div className={classes["cardholder"]}>
-              <label>Cardholder Name</label>
-              <input
-                className={
-                  formValidityState.nameErrors ? classes["error-boder"] : ""
-                }
-                name="name"
-                type="text"
-                placeholder="e.g. Jane Appleseed"
-                autoComplete="off"
-                value={state.name}
-                onChange={inputChangeHandler}
-                onBlur={(e) => {
-                  nameValidityFunction(e);
-                }}
-              ></input>
-            </div>
-            <div className={classes["curd-number"]}>
-              <div>
-                <label>Card Number</label>
-                {formValidityState.cardErrors && (
-                  <p>Wrong format, numbers only</p>
-                )}
+            <Input
+              className={classes["cardholder"]}
+              label={"Cardholder Name"}
+              nameIsValid={nameIsValid}
+              name={"name"}
+              type={"text"}
+              placeholder={"e.g. Jane Appleseed"}
+              autoComplete={"off"}
+              value={state.name}
+              onChange={inputChangeHandler}
+              onBlur={(e) => {
+                nameValidityFunction(e);
+              }}
+            ></Input>
+            <Input
+              className={classes["curd-number"]}
+              label={"Card Number"}
+              cardIsValid={cardIsValid}
+              name={"curdNumber"}
+              placeholder={"e.g. 1234 5678 9123 0000"}
+              maxLength={19}
+              autoComplete={"off"}
+              value={CurdNumberFormat(state.curdNumber)}
+              onChange={inputChangeHandler}
+              onBlur={(e) => {
+                curdValidityFunction(e);
+              }}
+            ></Input>
+            <div className={classes["data-cvc"]}>
+              <div className={classes.lables}>
+                <label>Exp. Date(MM/YY)</label>
+                <label>CVC</label>
               </div>
-              <input
-                name="curdNumber"
-                className={
-                  formValidityState.cardErrors ? classes["error-boder"] : ""
-                }
-                placeholder="e.g. 1234 5678 9123 0000"
-                maxLength={19}
-                autoComplete="off"
-                value={CurdNumberFormat(state.curdNumber)}
-                onChange={inputChangeHandler}
-                onBlur={(e) => {
-                  curdValidityFunction(e);
-                }}
-              ></input>
-            </div>
 
-            <div className={classes["exp-date"]}>
-              <div className={classes.data}>
-                <label>Exp. Date (MM/YY)</label>
-                <div className={classes.input}>
-                  <input
-                    name="month"
-                    className={
-                      formValidityState.monthErrors
-                        ? classes["error-boder"]
-                        : ""
-                    }
-                    // type="number"
-                    placeholder="MM"
-                    maxLength={2}
-                    autoComplete="off"
-                    value={state.expData}
-                    onChange={inputChangeHandler}
-                    onBlur={(e) => {
-                      monthValidityFunction(e);
-                    }}
-                  ></input>
-                  <input
-                    name="year"
-                    className={
-                      formValidityState.yearErrors ? classes["error-boder"] : ""
-                    }
-                    type="year"
-                    maxLength={4}
-                    placeholder="YY"
-                    autoComplete="off"
-                    value={state.year}
-                    onChange={inputChangeHandler}
-                    onBlur={(e) => {
-                      yearValidityFunction(e);
-                    }}
-                  ></input>
-                </div>
-              </div>
-              <div className={classes.cvc}>
-                <div>
-                  <label>CVC</label>
-                  {formValidityState.monthErrors ||
-                  formValidityState.yearErrors ||
-                  formValidityState.cvcErrors ? (
-                    <p>Can not be blank</p>
-                  ) : (
-                    ""
-                  )}
-                </div>
-                <input
-                  name="cvc"
-                  autoComplete="off"
+              <div className={classes.input}>
+                <Input
+                  className={classes["month"]}
+                  name={"month"}
+                  monthIsValid={monthIsValid}
+                  // className={monthIsValid ? classes["error-boder"] : ""}
+                  placeholder={"MM"}
+                  maxLength={2}
+                  autoComplete={"off"}
+                  value={state.expData}
+                  onChange={inputChangeHandler}
+                  onBlur={(e) => {
+                    monthValidityFunction(e);
+                  }}
+                ></Input>
+                <Input
+                  className={classes["year"]}
+                  name={"year"}
+                  yearIsValid={yearIsValid}
+                  type={"year"}
+                  maxLength={4}
+                  placeholder={"YY"}
+                  autoComplete={"off"}
+                  value={state.year}
+                  onChange={inputChangeHandler}
+                  onBlur={(e) => {
+                    yearValidityFunction(e);
+                  }}
+                ></Input>
+                <Input
+                  className={classes.cvc}
+                  cvcIsValid={cvcIsValid}
+                  name={"cvc"}
+                  autoComplete={"off"}
                   maxLength={3}
-                  className={
-                    formValidityState.cvcErrors ? classes["error-boder"] : ""
-                  }
-                  type="cvc"
-                  placeholder="e.g. 123"
+                  type={"cvc"}
+                  placeholder={"e.g. 123"}
                   value={state.cvc}
                   onChange={inputChangeHandler}
                   onBlur={(e) => {
                     cvcValidityFunction(e);
                   }}
-                ></input>
+                ></Input>
               </div>
+
+              {cvcIsValid || monthIsValid || yearIsValid ? (
+                <p>Can not be blank</p>
+              ) : (
+                ""
+              )}
             </div>
-            <Button type="submit" disabled={!formIsValid}>
+            <Button type="submit" disabled={formIsValid}>
               confirm
             </Button>
           </form>
         </Container>
       ) : (
-        <Container>
-          <Card state={state}></Card>
-          <div className={classes.resultCard}>
-            <div className={classes.circle}>
-              <img src={submitImg} alt="submitImg" />
-            </div>
-            <h1>THANK YOU!</h1>
-            <span>We have added your card details</span>
-            <Button>Continue</Button>
-          </div>
-        </Container>
+        <ResultCurd state={state} />
       )}
     </div>
   );

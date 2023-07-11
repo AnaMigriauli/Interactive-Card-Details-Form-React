@@ -7,18 +7,6 @@ form {
   margin: 91px 24px 45px 24px;
 }
 
-.exp-date {
-  display: flex;
-  gap: 11px;
-  width: 327px;
-  height: 69px;
-}
-.data {
-  display: flex;
-  flex-direction: column;
-  width: 152px;
-  height: 69px;
-}
 .data label,
 .cvc label {
   color: var(--deep-violet, #21092f);
@@ -33,7 +21,7 @@ form {
 }
 .input {
   display: flex;
-  gap: 8px;
+  height: 45px;
 }
 .input input {
   width: 72px;
@@ -45,12 +33,26 @@ form {
   cursor: pointer;
   padding-left: 16px;
 }
+.month {
+  margin-right: 8px;
+}
+.month label,
+.year label {
+  color: var(--deep-violet, #21092f);
+  font-family: Space Grotesk;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.year {
+  margin-right: 11px;
+}
 .cvc {
   width: 164px;
   height: 69px;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
 }
 .cvc input {
   width: 164px;
@@ -67,14 +69,31 @@ form {
   display: inline-flex;
   gap: 50px;
 }
-.cvc div p {
+form p {
   color: var(--red, #ff5050);
   font-size: 12px;
   font-family: Space Grotesk;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin: 0;
+  margin: 8px 0 0 0;
+  text-align: end;
+}
+.lables {
+  display: flex;
+  gap: 23px;
+  color: var(--deep-violet, #21092f);
+  font-family: Space Grotesk;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 9px;
+}
+.data-cvc {
+  height: 80.2px;
 }
 .curd-number,
 .cardholder {
@@ -146,54 +165,4 @@ form {
   font-weight: 500;
   line-height: normal;
   margin: 0;
-}
-.error-boder {
-  border: 1px solid var(--light-grey, #ff5050) !important;
-}
-
-.circle {
-  background: linear-gradient(164deg, #6348fe 0%, #610595 100%);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.circle img {
-  width: 24.04px;
-  height: 16px;
-  margin-bottom: 35px;
-  transform: translate(0px, 15px);
-}
-
-.resultCard {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
-  width: 327px;
-  height: 464px;
-  margin: 91px 24px 82px 24px;
-}
-
-.resultCard h1 {
-  margin-bottom: 16px;
-  color: var(--deep-violet, #21092f);
-  font-size: 28px;
-  font-family: Space Grotesk;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: 3.422px;
-}
-
-.resultCard span {
-  color: var(--purplish-grey, #8f8694);
-  margin-bottom: 48px;
-  font-size: 18px;
-  font-family: Space Grotesk;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
 }

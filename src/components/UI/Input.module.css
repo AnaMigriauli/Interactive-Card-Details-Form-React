@@ -1,0 +1,3 @@
+.error-boder {
+  border: 1px solid var(--light-grey, #ff5050) !important;
+}

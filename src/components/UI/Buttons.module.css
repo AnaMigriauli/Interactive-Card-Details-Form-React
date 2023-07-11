@@ -3,7 +3,7 @@
   height: 53px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: var(--deep-violet, #3f1258);
+  background: var(--deep-violet, #21092f);
   color: var(--white, #fff);
   font-size: 18px;
   font-family: Space Grotesk;
@@ -13,7 +13,15 @@
   margin-top: 8px;
   border: none;
 }
-.button:disabled {
-  background: var(--deep-violet, #21092f);
+.button:hover,
+.button:active {
+  background: var(--deep-violet, #2e0b42);
+}
+
+.button:disabled,
+.button:focus:disabled,
+.button:hover:disabled,
+.button:active:disabled {
+  background: var(--deep-violet, #21092fd5);
   cursor: not-allowed;
 }
