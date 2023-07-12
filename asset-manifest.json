@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Interactive-Card-Details-Form-React/static/css/main.8bbf51e4.css",
+    "main.css": "/Interactive-Card-Details-Form-React/static/css/main.f263d06e.css",
     "main.js": "/Interactive-Card-Details-Form-React/static/js/main.67a1026d.js",
     "static/media/SpaceGrotesk-VariableFont_wght.ttf": "/Interactive-Card-Details-Form-React/static/media/SpaceGrotesk-VariableFont_wght.1036357b9651eff7d3dd.ttf",
     "static/media/Group 8.svg": "/Interactive-Card-Details-Form-React/static/media/Group 8.b782f2f3e6fe8f4a8213a6978e928b06.svg",
     "static/media/Group 15.svg": "/Interactive-Card-Details-Form-React/static/media/Group 15.bc34b7c4ffbb445389056d6de75d089c.svg",
     "index.html": "/Interactive-Card-Details-Form-React/index.html",
     "static/media/Path.svg": "/Interactive-Card-Details-Form-React/static/media/Path.abeb2ffaab5967349f5f9bb280bf489b.svg",
-    "main.8bbf51e4.css.map": "/Interactive-Card-Details-Form-React/static/css/main.8bbf51e4.css.map",
+    "main.f263d06e.css.map": "/Interactive-Card-Details-Form-React/static/css/main.f263d06e.css.map",
     "main.67a1026d.js.map": "/Interactive-Card-Details-Form-React/static/js/main.67a1026d.js.map"
   },
   "entrypoints": [
-    "static/css/main.8bbf51e4.css",
+    "static/css/main.f263d06e.css",
     "static/js/main.67a1026d.js"
   ]
 }
