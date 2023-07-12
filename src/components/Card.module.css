@@ -1,5 +1,6 @@
 .header {
-  width: 375px;
+  /* width: 375px; */
+  width: 100%;
   height: 240px;
   background: #21092f;
   position: relative;
@@ -14,13 +15,16 @@
   right: 16px;
 }
 .mask-rectangle {
-  width: 286px;
+  width: 100%;
   height: 34.6px;
   background: #2f2f2f;
   margin-top: 14.74px;
 }
 .mask-cvc {
-  width: 230.975px;
+  /* width: 230.975px; */
+  width: 80%;
+  margin: 10px auto;
+
   height: 29.739px;
   background: #adb5be;
   color: var(--white, #fff);
@@ -49,16 +53,15 @@
   margin-bottom: 37px;
   border-radius: 50px;
 }
+.lines {
+  margin: 0 50px 10px 50px;
+}
 
 .mask-info {
-  display: inline-flex;
-  padding-bottom: 0px;
-  justify-content: center;
-  align-items: flex-start;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 0px;
 }
 .mask-card-number {
   color: var(--white, #fff);
@@ -70,7 +73,8 @@
   letter-spacing: 2.2px;
 }
 
-.mask-cardholder {
+.mask-cardholder,
+.mask-data {
   color: var(--white, #fff);
   font-size: 9px;
   font-family: Space Grotesk;
@@ -81,22 +85,134 @@
   text-transform: uppercase;
 }
 
-.mask-data {
-  color: var(--white, #fff);
-  text-align: right;
-  font-size: 9px;
-  font-family: Space Grotesk;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: 1.286px;
-  text-transform: uppercase;
+@media (min-width: 450px) {
+  .mask1 {
+    right: 60px;
+  }
+  .mask2 {
+    right: 114px;
+  }
 }
-/* .oval {
-  width: 347.5px;
-  height: 366.311px;
-  transform: rotate(45deg);
-  filter: blur(40px);
-  border-radius: 262.627px;
-  opacity: 0.8474048376083374;
-} */
+
+@media (min-width: 530px) {
+  .mask1 {
+    right: 110px;
+  }
+  .mask2 {
+    right: 166px;
+  }
+}
+@media (min-width: 650px) {
+  .mask1 {
+    right: 180px;
+  }
+  .mask2 {
+    right: 234px;
+  }
+}
+@media (min-width: 700px) {
+  .header {
+    background: #21092f;
+    position: relative;
+    width: 35%;
+    height: 100%;
+  }
+  .mask2 {
+    margin: 0;
+    top: 180px;
+    left: 10px;
+  }
+  .mask1 {
+    margin: 0;
+    top: 380px;
+    left: 40px;
+  }
+}
+
+@media (min-width: 800px) {
+  .mask2 {
+    left: 50px;
+  }
+  .mask1 {
+    left: 90px;
+  }
+}
+@media (min-width: 900px) {
+  .mask2 {
+    left: 100px;
+  }
+  .mask1 {
+    left: 140px;
+  }
+}
+@media (min-width: 1070px) {
+  .header {
+    width: 40%;
+  }
+  .mask2 {
+    width: 447px;
+    height: 245px;
+    left: 100px;
+    top: 100px;
+  }
+  .mask1 {
+    width: 447px;
+    height: 245px;
+    left: 170px;
+    top: 380px;
+  }
+  .mask-cvc {
+    height: 38px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin: 24px auto 33px auto;
+  }
+  .lines {
+    margin: 0 130px;
+  }
+  .mask-rectangle {
+    height: 54px;
+    margin-top: 24px;
+  }
+  .circles {
+    width: 84px;
+    height: 47px;
+    margin-bottom: 64px;
+  }
+  .mask-card-number {
+    font-size: 28px;
+    letter-spacing: 3.422px;
+    margin-bottom: 25.5px;
+  }
+  .mask-info {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .mask-cardholder,
+  .mask-data {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (min-width: 1250px) {
+  .mask2 {
+    left: 160px;
+  }
+  .mask1 {
+    left: 230px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .mask2 {
+    left: 290px;
+  }
+  .mask1 {
+    left: 390px;
+  }
+}

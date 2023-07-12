@@ -146,7 +146,7 @@ const MainContainer = () => {
   };
 
   return (
-    <div>
+    <div className={classes.mask}>
       {!isSubmit ? (
         <Container>
           <Card state={state}></Card>
@@ -158,6 +158,7 @@ const MainContainer = () => {
               name={"name"}
               type={"text"}
               placeholder={"e.g. Jane Appleseed"}
+              maxLength={30}
               autoComplete={"off"}
               value={state.name}
               onChange={inputChangeHandler}

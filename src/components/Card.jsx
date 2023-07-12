@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Card.module.css";
 import circles from "../assets/images/Group 8.svg";
-// import oval from "../assets/images/Group 10.svg";
+import lines from "../assets/images/Group 15.svg";
 
 const Card = (props) => {
   return (
@@ -11,10 +11,10 @@ const Card = (props) => {
         <div className={classes["mask-cvc"]}>
           {props.state.cvc ? props.state.cvc : "000"}
         </div>
+        <img className={classes.lines} src={lines} alt="lines" />
       </div>
       <div className={classes.mask2}>
         <img className={classes.circles} src={circles} alt="circles" />
-        {/* <img className={classes.oval} src={oval} alt="oval" /> */}
         <div className={classes["mask-card-number"]}>
           {props.state.curdNumber
             ? props.state.curdNumber

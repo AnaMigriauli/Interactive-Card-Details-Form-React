@@ -44,3 +44,29 @@
   font-weight: 500;
   line-height: normal;
 }
+
+@media (min-width: 450px) {
+  .resultCard {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 91px auto;
+  }
+}
+@media (min-width: 700px) {
+  .resultCard {
+    width: 381px;
+    margin: 91px 10px 91px 130px;
+  }
+}
+
+@media (min-width: 1070px) {
+  .resultCard {
+    margin: 100px 40px 91px 70px;
+  }
+}
+@media (min-width: 1250px) {
+  .resultCard {
+    margin: 100px 120px 91px 80px;
+  }
+}
