@@ -191,7 +191,6 @@ const MainContainer = () => {
                   className={classes["month"]}
                   name={"month"}
                   monthIsValid={monthIsValid}
-                  // className={monthIsValid ? classes["error-boder"] : ""}
                   placeholder={"MM"}
                   maxLength={2}
                   autoComplete={"off"}

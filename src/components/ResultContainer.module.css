@@ -17,7 +17,6 @@
 .resultCard {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   width: 327px;
   height: 464px;
@@ -26,7 +25,7 @@
 
 .resultCard h1 {
   margin-bottom: 16px;
-  color: var(--deep-violet, #21092f);
+  color: #21092f;
   font-size: 28px;
   font-family: Space Grotesk;
   font-style: normal;
@@ -36,7 +35,7 @@
 }
 
 .resultCard span {
-  color: var(--purplish-grey, #8f8694);
+  color: #8f8694;
   margin-bottom: 48px;
   font-size: 18px;
   font-family: Space Grotesk;

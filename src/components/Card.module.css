@@ -1,5 +1,4 @@
 .header {
-  /* width: 375px; */
   width: 100%;
   height: 240px;
   background: #21092f;
@@ -21,13 +20,12 @@
   margin-top: 14.74px;
 }
 .mask-cvc {
-  /* width: 230.975px; */
+  border-radius: 4px;
   width: 80%;
   margin: 10px auto;
-
   height: 29.739px;
   background: #adb5be;
-  color: var(--white, #fff);
+  color: #fff;
   text-align: right;
   font-size: 9px;
   font-family: Space Grotesk;
@@ -64,7 +62,7 @@
   padding-bottom: 0px;
 }
 .mask-card-number {
-  color: var(--white, #fff);
+  color: #fff;
   font-size: 18px;
   font-family: Space Grotesk;
   font-style: normal;
@@ -75,7 +73,7 @@
 
 .mask-cardholder,
 .mask-data {
-  color: var(--white, #fff);
+  color: #fff;
   font-size: 9px;
   font-family: Space Grotesk;
   font-style: normal;
